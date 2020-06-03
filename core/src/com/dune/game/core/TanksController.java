@@ -50,21 +50,23 @@ public class TanksController extends ObjectPool<Tank> {
         checkPool();
     }
 
-    public void playerUpdate(float dt) {
+    public void playerUpdate(float dt) { //реакции на действия игрока.
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             for (int i = 0; i < gc.getSelectedUnits().size(); i++) {
                 Tank t = gc.getSelectedUnits().get(i);
                 if (t.getOwnerType() == Tank.Owner.PLAYER && gc.getSelectedUnits().contains(t)) {
                     tmp.set(Gdx.input.getX(), 720 - Gdx.input.getY());
-                    if (t.getWeapon().getType() == Weapon.Type.HARVEST) {
+                    if (t.getWeapon().getType() == Weapon.Type.HARVEST) {//если харвестер едь в tmp
                         t.commandMoveTo(tmp);
                     }
-                    if (t.getWeapon().getType() == Weapon.Type.GROUND) {
+                    if (t.getWeapon().getType() == Weapon.Type.GROUND) {//если наземный
                         Tank aiTank = gc.getTanksController().getNearestAiTank(tmp);
-                        if (aiTank == null) {
+                        if (aiTank == null) { //клик по земле едь
                             t.commandMoveTo(tmp);
-                        } else {
-                            t.commandAttack(aiTank);
+                            t.target=null; //чтобы прервать атаку танков
+                        } else { //если чужой танк подъедь и атакуй
+                            t.commandAttack(aiTank); //танк залипает в атаке и не едет в указаную точку если указать
+
                         }
                     }
                 }
@@ -72,7 +74,7 @@ public class TanksController extends ObjectPool<Tank> {
         }
     }
 
-    public void aiUpdate(float dt) {
+    public void aiUpdate(float dt) { //реакции на действия AI.
 
     }
 }

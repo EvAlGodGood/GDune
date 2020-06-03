@@ -20,6 +20,9 @@ public class Tank extends GameObject implements Poolable {
     private TextureRegion[] weaponsTextures;
 
     private TextureRegion progressbarTexture;
+
+
+
     private int hp;
     private int hpMax;
     private float angle;
@@ -30,8 +33,15 @@ public class Tank extends GameObject implements Poolable {
     private float lifeTime;
     private float timePerFrame;
     private int container;
-    private Tank target;
+    public Tank target;
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return hp;
+    }
     public Weapon getWeapon() {
         return weapon;
     }
@@ -122,7 +132,7 @@ public class Tank extends GameObject implements Poolable {
     public void updateWeapon(float dt) {
         if (weapon.getType() == Weapon.Type.GROUND && target != null) {
             float angleTo = tmp.set(target.position).sub(position).angle();
-            weapon.setAngle(rotateTo(weapon.getAngle(), angleTo, 180.0f, dt));
+            weapon.setAngle(rotateTo(weapon.getAngle(), angleTo, 100.0f, dt));
             int power = weapon.use(dt);
             if (power > -1) {
                 gc.getProjectilesController().setup(position, weapon.getAngle());
