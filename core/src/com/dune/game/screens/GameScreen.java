@@ -10,7 +10,7 @@ public class GameScreen extends AbstractScreen {
     private WorldRenderer worldRenderer;
 
     public GameScreen(SpriteBatch batch) {
-        this.batch = batch;
+        this.batch = batch; //передали игровому окну буфер спрайтов
     }
 
     @Override
