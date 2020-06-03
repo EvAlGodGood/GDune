@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dune.game.screens.GameScreen;
 
 public class DuneGame extends Game {
-	private SpriteBatch batch;
+	private SpriteBatch batch; //буфер спрайтов
 	private GameScreen gameScreen;
 
 	// Список идей:
@@ -16,9 +16,9 @@ public class DuneGame extends Game {
 
 	// Домашнее задание:
 	// 1. Разобраться с кодом
-	// 2. Снаряды должны попадать по танкам
-	// 3. Танк получает урон от снаряда, если хп упало до 0,
-	// то танк уничтожается
+	//// 2. Снаряды должны попадать по танкам
+	//// 3. Танк получает урон от снаряда, если хп упало до 0,
+	//// то танк уничтожается
 
 	@Override
 	public void create() {
@@ -29,11 +29,11 @@ public class DuneGame extends Game {
 
 	@Override
 	public void render() {
-		getScreen().render(Gdx.graphics.getDeltaTime());
+		getScreen().render(Gdx.graphics.getDeltaTime()); //рисовать окно с собранными спрайтами
 	}
 
 	@Override
 	public void dispose() {
-		batch.dispose();
+		batch.dispose(); //очистить буфер спрайтов
 	}
 }

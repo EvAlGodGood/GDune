@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -61,6 +62,7 @@ public class GameController {
         projectilesController.update(dt);
         map.update(dt);
         checkCollisions(dt);
+        checkHit(dt);
         // checkSelection();
     }
 
@@ -81,6 +83,28 @@ public class GameController {
         }
     }
 
+    public void checkHit(float dt) { //проверка попадания
+        for (int i = 0; i < tanksController.activeSize(); i++) {
+            Tank t2 = tanksController.getActiveList().get(i);
+            for (int j = 0; j< projectilesController.activeSize(); j++){
+                Projectile p2 = projectilesController.getActiveList().get(j);
+                if (Math.abs(t2.position.x - p2.position.x)<30 && Math.abs(t2.position.y - p2.position.y)<30 && t2.getOwnerType().equals(Tank.Owner.AI)){
+                    t2.setHp(t2.getHp()-30);
+                    p2.position.x=-30; //выброс снаряда за поле для удаления
+                    if(!t2.isActive()){
+                        for (int t = 0; t < tanksController.activeSize(); t++) { //сброс для всех
+                            Tank t3 = tanksController.getActiveList().get(t);
+                            t3.target = null;
+                        }
+                    }
+                    //System.out.println(t2.getHp());
+                }
+
+            }
+
+        }
+    }
+
     public boolean isTankSelected(Tank tank) {
         return selectedUnits.contains(tank);
     }
@@ -97,8 +121,8 @@ public class GameController {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                if (button == Input.Buttons.LEFT) {
-                    tmp.set(Gdx.input.getX(), 720 - Gdx.input.getY());
+                if (button == Input.Buttons.LEFT) { //если нажата левая кнопка
+                    tmp.set(Gdx.input.getX(), 720 - Gdx.input.getY()); //берем координаты
 
                     if (tmp.x < selectionStart.x) {
                         float t = tmp.x;
@@ -111,7 +135,7 @@ public class GameController {
                         selectionStart.y = t;
                     }
 
-                    selectedUnits.clear();
+                    selectedUnits.clear(); //выбор областью нескольких
                     if (Math.abs(tmp.x - selectionStart.x) > 20 & Math.abs(tmp.y - selectionStart.y) > 20) {
                         for (int i = 0; i < tanksController.getActiveList().size(); i++) {
                             Tank t = tanksController.getActiveList().get(i);
@@ -121,7 +145,7 @@ public class GameController {
                                 selectedUnits.add(t);
                             }
                         }
-                    } else {
+                    } else { //клик на одного
                         for (int i = 0; i < tanksController.getActiveList().size(); i++) {
                             Tank t = tanksController.getActiveList().get(i);
                             if (t.getPosition().dst(tmp) < 30.0f) {
