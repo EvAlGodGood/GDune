@@ -3,6 +3,7 @@ package com.dune.game.core;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.dune.game.core.units.AbstractUnit;
 
 public class ProjectilesController extends ObjectPool<Projectile> {
     private GameController gc;
@@ -24,9 +25,9 @@ public class ProjectilesController extends ObjectPool<Projectile> {
         }
     }
 
-    public void setup(Vector2 srcPosition, float angle) {
+    public void setup(AbstractUnit owner, Vector2 srcPosition, float angle) {
         Projectile p = activateObject();
-        p.setup(srcPosition, angle, projectileTexture);
+        p.setup(owner, srcPosition, angle, projectileTexture);
     }
 
     public void update(float dt) {

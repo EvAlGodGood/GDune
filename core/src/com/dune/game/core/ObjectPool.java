@@ -1,9 +1,5 @@
 package com.dune.game.core;
 
-//Package com.dune.game.core;
-
-import com.dune.game.core.Poolable;
-
 import java.util.ArrayList;
 import java.util.List;
 
