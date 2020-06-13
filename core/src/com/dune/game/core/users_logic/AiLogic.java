@@ -17,6 +17,7 @@ public class AiLogic extends BaseLogic {
     private float timer;
 
     private List<BattleTank> tmpAiBattleTanks;
+    //private List<BattleTank> tmpAiBattleTanks;
     private List<Harvester> tmpPlayerHarvesters;
     private List<Harvester> tmpPlayerBattleTanks;
 
