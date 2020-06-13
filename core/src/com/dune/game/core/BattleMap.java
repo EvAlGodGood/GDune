@@ -66,8 +66,8 @@ public class BattleMap {
         }
     }
 
-    public static final int COLUMNS_COUNT = 24;
-    public static final int ROWS_COUNT = 16;
+    public static final int COLUMNS_COUNT = 24;//1440
+    public static final int ROWS_COUNT = 16;//960
     public static final int CELL_SIZE = 60;
     public static final int MAP_WIDTH_PX = COLUMNS_COUNT * CELL_SIZE;
     public static final int MAP_HEIGHT_PX = ROWS_COUNT * CELL_SIZE;
