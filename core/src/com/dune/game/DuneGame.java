@@ -8,30 +8,29 @@ import com.dune.game.screens.GameScreen;
 import com.dune.game.screens.ScreenManager;
 
 public class DuneGame extends Game {
-	private SpriteBatch batch;
+    private SpriteBatch batch;
 
-	// Домашнее задание:
-	/// 1. Разобраться с кодом
-	/// 2. Сделайте площадку, куда харвестеры могут сдавать ресуры, и они должны начисляться игроку
-	// 3. Сделайте GUI для экрана меню (начать игру, выйти из игры) [ Выход через: Gdx.app.exit(); ]
+    // Домашнее задание:
+    // 1. Разобраться с кодом
+    // 2. Харвестеры AI должны собирать ресурсы и отвозить на базу
 
-	@Override
-	public void create() {
-		batch = new SpriteBatch();
-		ScreenManager.getInstance().init(this, batch);
-		ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.GAME);
-	}
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
+        ScreenManager.getInstance().init(this, batch);
+        ScreenManager.getInstance().changeScreen(ScreenManager.ScreenType.GAME);
+    }
 
-	@Override
-	public void render() {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		float dt = Gdx.graphics.getDeltaTime();
-		getScreen().render(dt);
-	}
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        float dt = Gdx.graphics.getDeltaTime();
+        getScreen().render(dt);
+    }
 
-	@Override
-	public void dispose() {
-		batch.dispose();
-	}
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
 }

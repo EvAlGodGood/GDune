@@ -1,4 +1,4 @@
-package com.dune.game.core;
+package com.dune.game.screens.utils;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
@@ -44,7 +44,6 @@ public class Assets {
             case GAME:
                 assetManager.load("images/game.pack", TextureAtlas.class);
                 createStandardFont(14);
-                createStandardFont(24);
                 createStandardFont(32);
                 break;
         }
